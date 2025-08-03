@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analyzer</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #d3cce3, #e9e4f0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #6a11cb;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 90%;
+            height: 150px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.9s ease;
+        }
+
+        button:hover {
+            background-color: #5c0eb3;
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .positive {
+            color: #28a745;
+        }
+
+        .negative {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analyzer</h1>
+        <form method="post">
+            <textarea name="reviewText" placeholder="Enter your review here...">{{ request.form.reviewText }}</textarea><br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {{ 'positive' if 'Positive' in prediction else 'negative' }}">
+                Sentiment: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
